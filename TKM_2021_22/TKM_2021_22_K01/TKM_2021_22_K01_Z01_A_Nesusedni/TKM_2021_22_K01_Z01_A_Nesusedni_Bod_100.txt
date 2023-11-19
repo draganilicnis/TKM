@@ -1,0 +1,264 @@
+Такмичење из програмирања 2021-2022 – 1. круг квалификација
+Задатак 01 – А – Несуседни
+https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882 
+Vremensko ograničenje	Memorijsko ograničenje	ulaz	izlaz
+0,2 s	256 MB	standardni ulaz	standardni izlaz
+Програмер Пера има омиљено слово c1 (једно од малих слова енглеског алфабета) и поседује a1 комада овог слова. Програмерка Петра такође има своје омиљено слово c2 (једно од малих слова енеглеског алфабета, различито од Петровог) и a2 комада свог слова.
+Пера и Петра су решили да направе стринг у коме ће се наћи свих a1+a2 њихових слова али такав да у њему не постоје два иста суседна слова. Одредите било који стринг који задовољава ове услове или констатујте да такав стринг не постоји.
+Опис улаза
+У првом реду стандардног улаза се налазе Перино и Петрино слово c1 и c2, редом, без размака. У наредном реду се налазе два природна броја a1 и a2, раздвојена размаком, која представљају број комада слова које поседују Пера и Петра, редом.
+Опис излаза
+У првом реду исписати стринг који задовољава све услове из задатка. Уколико има више решења, исписати било које. Уколико решење не постоји, исписати 'nemoguce' (без наводника).
+Пример 1
+Улаз
+ab
+2 2
+Излаз
+baba
+
+Пример 2
+Улаз
+nm
+4 10
+Излаз
+nemoguce
+
+Објашњења примера
+
+У првом примеру су искоришћена 2 слова 'a' и 2 слова 'b' и не постоје два иста суседна слова - дакле, стринг је валидан. Стринг 'abab' је такође валидно решење за овај пример. У другом примеру, ма како распоредили 4 слова 'n' и 10 слова 'm', увек ће постојати два суседна иста слова па тражени стринг не постоји.
+
+Ограничења
+
+•	c1 и c2  су међусобно различита мала слова енглеског алфабета 
+•	1 ≤a1,a2 ≤50.000
+
+
+Тест примери су подељени у 3 дисјункне групе:
+•	У тест примерима вредним 20 поена важи c1= 'a', c2= 'b' и 1  ≤  a1,  a2  ≤ 3. 
+•	У тест примерима вредним 40 поена важи 1 ≤ a1, a2 ≤ 1.000
+•	У тест примерима вредним 40 поена нема додатних ограничења.
+
+01.	Такмичење из програмирања 2021/2022 - 1. круг квалификација - 1. задатак А - Несуседни: https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882   
+
+ 
+
+
+// C# - Решење за 100 поена
+using System;
+// https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+// https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882 
+// Kurs 1. razred, tema 7.5. String i niz karaktera - Koliko je sporo: https://petlja.org/kurs/11171/36/1399#id5
+// Kurs 1. razred, tema 10.3. Argumenti komandne linije programa – Preusmeravanje standardnog ulaza i izlaza:
+// https://petlja.org/kurs/11171/44/2431#id2
+
+class Tkm_2021_22_K_01_Zad_01_Nesusedni_Bod_100
+{
+    static void Main()
+    {
+        string ulaz_slova_dva = Console.ReadLine();
+
+        string[] ulaz_broj_slova = Console.ReadLine().Split();
+        int a = int.Parse(ulaz_broj_slova[0]);
+        int b = int.Parse(ulaz_broj_slova[1]);
+
+        if (Math.Abs(a - b) > 1)
+        {
+            Console.WriteLine("nemoguce");
+        }
+        else
+        {
+            if (a < b) { Console.Write(ulaz_slova_dva[1]); }    
+
+            for (int i = 0; i < Math.Min(a, b); i++) { Console.Write(ulaz_slova_dva); }  
+            
+            if (a > b) { Console.Write(ulaz_slova_dva[0]); }  
+            Console.WriteLine();
+        }
+    }
+}
+
+Напомена:
+
+Приликом тестирања (извршавања) овог програмског кода примећујемо да ће исписивање излазних података на екран трајати секунду или две, уколико за улазне податке, односно природне бројеве а1 и а2 унесемо бројеве који су већи од неколико десетина хиљада, на пример:
+
+ab
+50000 50000
+
+Ипак, на систему за такмичење на сајту Petlja.org овај програмски код се извршава за мање од 0,2 секунде. Разлог је тај што се на систему приликом извршавања, односно тестирања програмског кода, излазни резултати не исписују на екрану (монитору), већ у излазне датотеке редирекцијом (преусмеравањем стандардног улаза и излаза), што је значајно брже. Уводне материјале о томе можете пронаћи у оквиру курса за 1. разреде, односно теме 10.3. у на следећој адреси:
+
+•	https://petlja.org/kurs/11171/44/2431#id2
+ 
+
+
+
+// C# - Решење за 075 поена
+// https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+// https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882 
+// Kurs 1. razred, tema 7.5. String i niz karaktera - Koliko je sporo: https://petlja.org/kurs/11171/36/1399#id5
+// Kurs 1. razred, tema 10.3. Argumenti komandne linije programa – Preusmeravanje standardnog ulaza i izlaza:
+// https://petlja.org/kurs/11171/44/2431#id2
+using System;
+
+class Tkm_2021_22_K01_Z01_A_Nesusedni_Bod_075
+{
+    static void Main()
+    {
+        string ulaz_slova_dva = Console.ReadLine();
+        char c1 = ulaz_slova_dva[0];
+        char c2 = ulaz_slova_dva[1];
+
+        string[] ulaz_broj_slova = Console.ReadLine().Split();
+        int a = int.Parse(ulaz_broj_slova[0]);
+        int b = int.Parse(ulaz_broj_slova[1]);
+
+        if (Math.Abs(a - b) > 1)
+        {
+            Console.WriteLine("nemoguce");
+        }
+        else
+        {
+            string sRezultat = "";
+            if (a < b) { sRezultat = sRezultat + c2; }
+
+            for (int i = 0; i < Math.Min(a, b); i++) { sRezultat = sRezultat + ulaz_slova_dva; }
+
+            if (a > b) { sRezultat = sRezultat + c1; }
+            Console.WriteLine(sRezultat);
+        }
+    }
+}
+
+Напомена:
+
+Приликом тестирања (извршавања) овог програмског кода примећујемо да ће исписивање излазних података на екран трајати неколико секунди, уколико за улазне податке, односно природне бројеве а1 и а2 унесемо бројеве који су већи од неколико десетина хиљада, на пример:
+
+ab
+50000 50000
+
+Такође, на систему за такмичење на сајту Petlja.org овај програмски код се извршава за мање од 0,2 секунде за првих 14 тест примера, за 15. и 16. тест пример око 0,1 секунду, а за последљих 5 тест примера за више од 0,2 секунде, па решење задатка добија 75 бодова. Разлог, због којег се програмски код извршава знатно спорије је тај што смо користили конкатенацију (надовезивање стрингова). Уместо конатенације (надовезивање стрингова) програмски код ће се извршавати знатно брже уколико користимо стринг као низ карактера или помоћу градитеља стринга, односно коришћењем библиотечког објекта типа StingBuilder, као што је обијашњено у оквиру курса за 1. разред и теме 7.5. Стринг и низ карактера – Трансформисање стрингова – Колико споро је споро, коју можемо погледати на адреси:
+
+•	https://petlja.org/kurs/11171/44/2431#id2
+
+StringBuilder:                      00:00:00.0094086
+Konverzija u niz i iz niza:         00:00:00.0169987
+Primena Replace slovo po slovo:     00:00:00.1088408
+Nadovezivanje karaktera na string:  00:04:33.9270174
+
+ 
+
+// C# https://petlja.org/kurs/11171/36/1399#id5 
+// https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+// https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882 
+// Kurs 1. razred, tema 7.5. String i niz karaktera - Koliko je sporo: https://petlja.org/kurs/11171/36/1399#id5 
+// Kurs 1. razred, tema 10.3. Argumenti komandne linije programa – Preusmeravanje standardnog ulaza i izlaza: 
+// https://petlja.org/kurs/11171/44/2431#id2  
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+
+class Program
+{
+    static string Ponovi(string sekvenca, int brPonavljanja)
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < brPonavljanja; i++)
+            sb.Append(sekvenca);
+        return sb.ToString();
+    }
+
+    static TimeSpan Test(int nacin, out string s)
+    {
+        string svaSlovaICifre =
+            "abcdefghijklmnopqrstuvwxyz"
+            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            + "0123456789";
+
+        int N = 10000;
+        s = Ponovi(svaSlovaICifre, N);
+        Stopwatch t = new Stopwatch();
+        t.Start();
+
+        switch (nacin)
+        {
+            case 1:
+                StringBuilder sb = new StringBuilder();
+                foreach (char c in s)
+                    sb.Append(char.IsLetterOrDigit(c) ? '_' : c);
+                s = sb.ToString();
+                break;
+            case 2:
+                char[] a = s.ToArray();
+                for (int i = 0; i < a.Length; i++)
+                    if (char.IsLetterOrDigit(a[i]))
+                        a[i] = '_';
+                s = new string(a);
+                break;
+            case 3:
+                foreach (char slovo in svaSlovaICifre)
+                    s = s.Replace(slovo, '_');
+                break;
+            case 4:
+                string s1 = "";
+                foreach (char c in s)
+                    s1 += char.IsLetterOrDigit(c) ? '_' : c;
+                s = s1;
+                break;
+        }
+
+        t.Stop();
+        return t.Elapsed;
+
+    }
+    static void Main()
+    {
+        string s = "";
+        Console.WriteLine("StringBuilder:                      " + Test(1, out s));
+        Console.WriteLine("Konverzija u niz i iz niza:         " + Test(2, out s));
+        Console.WriteLine("Primena Replace slovo po slovo:     " + Test(3, out s));
+        Console.WriteLine("Nadovezivanje karaktera na string:  " + Test(4, out s));
+    }
+}
+
+ 
+
+
+// C# - Коришћење градитеља стринга (StringBuilder) - Решење за 100 поена
+// https://arena.petlja.org/competition/2021-2022-kv1-testiranje#tab_134035 
+// https://algora.petlja.org/t/resenja-zadataka-2021-2022-kvalifikacije-prvi-krug/6882 
+// Kurs 1. razred, tema 7.5. String i niz karaktera - Koliko je sporo: https://petlja.org/kurs/11171/36/1399#id5
+// Kurs 1. razred, tema 10.3. Argumenti komandne linije programa – Preusmeravanje standardnog ulaza i izlaza:
+// https://petlja.org/kurs/11171/44/2431#id2
+using System;
+using System.Text;
+class Tkm_2021_22_K01_Z01_A_Nesusedni_Bod_100
+{
+
+    static void Main()
+    {
+        string ulaz_slova_dva = Console.ReadLine();
+        char c1 = ulaz_slova_dva[0];
+        char c2 = ulaz_slova_dva[1];
+
+        string[] ulaz_broj_slova = Console.ReadLine().Split();
+        int a = int.Parse(ulaz_broj_slova[0]);
+        int b = int.Parse(ulaz_broj_slova[1]);
+
+        if (Math.Abs(a - b) > 1)
+        {
+            Console.WriteLine("nemoguce");
+        }
+        else
+        {
+            StringBuilder sRezultat = new StringBuilder();
+            // string dva_slova = ulaz_slova_dva; // "" + c1 + c2;
+            if (a < b) { sRezultat.Append(c2); }
+            int n = Math.Min(a, b);
+            for (int i = 0; i < n; i++) { sRezultat.Append(ulaz_slova_dva); }
+            if (a > b) { sRezultat.Append(c1); }
+            Console.WriteLine(sRezultat);
+        }
+    }
+}
